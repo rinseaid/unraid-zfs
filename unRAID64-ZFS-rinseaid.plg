@@ -1,0 +1,442 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!-- PLUGIN DEFINITIONS -->
+<!DOCTYPE PLUGIN [
+  <!ENTITY name      "unRAID64-ZFS-rinseaid">
+  <!ENTITY author    "rinseaid">
+  <!ENTITY version   "0.0.1">
+  <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unraid-zfs/master">
+  <!ENTITY pluginURL "&repo;/&name;.plg">
+  <!ENTITY plugin    "/boot/config/plugins/&name;">
+  <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
+]>
+
+<PLUGIN  name="&name;"
+     author="&author;"
+     version="&version;"
+     pluginURL="&pluginURL;"
+>
+
+<CHANGES>
+
+###2018.01.03
+- Update to compile for unRAID 6.4.0_rc18f
+- Updated to zfs and spl 0.7.4 (kernel 4.14.9)
+
+###2017.10.11
+- Updated to zfs and spl 0.7.2 (kernel 4.9.30)
+- A collection of great features got added in the 0.7 branch: https://github.com/zfsonlinux/zfs/releases/tag/zfs-0.7.0
+
+###2017.05.27
+- Updated for unRAID 6.3.5 (kernel 4.9.30)
+- Removed support for 6.2.1
+
+###2017.05.21
+- Updated for unRAID 6.3.4 (kernel 4.9.28)
+- Removed support for 6.1.9 and 6.2.0
+
+###2017.03.31
+- Updated for unRAID 6.3.3 (kernel 4.9.19)
+
+###2017.02.20
+- Updated for unRAID 6.3.2 (kernel 4.9.10)
+
+###2017.02.05
+- Updated for unRAID 6.3.1 (kernel 4.9.8)
+
+###2017.02.05
+- Updated for unRAID 6.3 (kernel 4.9.7)
+- Updated to spl-0.6.5.9 / zfs-0.6.5.9
+- Removed all 6.3 rc versions
+
+
+###2016.11.07
+- Updated to 6.2.4 (kernel 4.4.30)
+- Removed all 6.2 rc versions
+
+###2016.10.25
+- Updated to 6.2.2 (kernel 4.4.26)
+- Removed 6.1.8
+
+###2016.10.25
+- Updated to 6.3.rc3 (kernel 4.8.3)
+
+###2016.09.13
+- Updated to 6.2.1 (kernel 4.4.23)
+
+###2016.09.13
+- Updated to spl-0.6.5.8 / zfs-0.6.5.8
+- Updated to 6.2.0-stable (kernel 4.4.19)
+
+###2016.09.13
+- Updated to 6.2.0-rc5 (kernel 4.4.19)
+- Removed support for all 6.2.0 beta versions
+
+###2016.08.23
+- Updated to 6.2.0-rc4 (kernel 4.4.18)
+- Removed support for 6.2.0 beta 18-19
+
+###2016.07.14
+- Updated to 6.2.0-rc2 (kernel 4.4.15)
+
+###2016.07.12
+- Updated to 6.2.0-rc1 (kernel 4.4.14)
+
+###2016.06.14
+- Updated to 6.2.0-beta23 (kernel 4.4.13)
+
+###2016.06.10
+- Updated to 6.2.0-beta22 (kernel 4.4.13)
+- Remove support for 6.1.7
+- Update to spl-0.6.5.7 / zfs-0.6.5.7
+
+###2016.04.06
+- Updated to 6.2.0-beta21 (kernel 4.4.6)
+
+###2016.03.31
+- Updated to 6.2.0-beta20 (kernel 4.4.6)
+- Updated to zfs 0.6.5.6 and spl 0.6.5.6
+- Removed support for 6.1.4 - 6.1.6
+
+###2016.03.21
+- remove support for 6.1.2 - 6.1.3
+
+###2016.03.21		
+- Update to 6.2.0-beta19 (kernel 4.4.5)
+ 
+###2016.03.12
+- Only download needed tgz (Thanks gfjardim)
+- Remove old tgz
+
+###2016.03.11
+- Change plugin to support unRAID 6.1.2 - 6.2.0-beta18 (kernel 4.4.4)
+- Update to spl-0.6.5.5 / zfs-0.6.5.5
+
+###2016.03.06
+- update to unRAID 6.1.9 (kernel 4.1.18)
+
+###2016.02.10
+- update to unRAID 6.1.8 (kernel 4.1.17)
+
+###2016.01.18
+- Remove old packages
+
+###2016.01.18
+- Change path of the zfs tools
+
+###2016.01.18
+- update to unRAID 6.1.7 (kernel 4.1.15)
+
+###2015.11.18
+- document unRAID 6.1.5 - 6.1.6 (no change in kernel)
+
+###2015.11.18
+- update to unRAID 6.1.4 (kernel 4.1.13)
+
+###2015.10.24
+- update to spl-0.6.5.3 / zfs-0.6.5.3
+
+###2015.09.21
+- update to unRAID 6.1.3 (kernel 4.1.7)
+
+###2015.09.20
+- update to spl-0.6.5.1 / zfs-0.6.5.1
+
+###2015.09.19
+- OpenZFS version 0.6.5 for unRAID 6.1.2 (and all versions running kernel 4.1.5-unRAID)
+
+</CHANGES>
+
+<FILE Name="&emhttp;/README.md">
+<INLINE>
+ZFS for unRAID 6
+
+The native Linux kernel port of the ZFS filesystem.
+
+Allows you to use ZFS format on non Array disks.
+
+* ONLY SUPPORTED ON unRAID 6.2.2 - 6.4.0_rc18f  *
+
+</INLINE>
+</FILE>
+
+<FILE Name="&emhttp;/unRAID6-ZFS.png" Type="base64">
+<INLINE>
+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
+mP+LK0nEAgTYvmcvo26fyQcN28lOxFDlM6qKtYaKslJKiosQzaiuqaW8sgrnPSLC55TQeVrnZDHz
+mss4rldXImsbtnPpnfexbdfHBIHBGMPfb/gxvfI7EqnbvJ2Lb7uXvS1JInlZCR7+5ZUUdu5AZG3D
+Nr5381/w3hOGno5tW/HA5Cvold+ByDtrNzCu4gH2NLUQWAMIn1JVrDVUlJVSUlyEaMYLS1dSXlmF
+VwURhH1UwQi0pEMGFhYw4bxvE7OWyqf/wVur15EVD1CFtHMcU9CZay46A2st0598mcXvryM7HiPS
+nEoz5OgeXHX+MELnqHh0IavqNxOzFhFoSYWccFQPyr57GmnnmP7UKyyrqycrFuAVRPiEkqGKMUJF
+WSlnDuqHeO914TurKJ9eRdo5jBgQPqOqiAjp0BFYg4iQDh2xwAIKCKpK6Dwxa0CEZDokKxbgVYkY
+EVrSIYlYAKqknSewBhEBFBDSoSMWWFSV0HligUVVERE+o+DVE4tZKq68mNOP64toxjtrNzJ+2lz2
+NDUTswav/AsjglclYkTwquzPiOBViRgRvCr7MyJ4VSJGBK/K/owIXpWIEcGr8mVGIO08bXKymTFx
+NAN7dUWcc5p2ngl/fJDnlqygdW42RoTDkVdlT2MzZx/fn8qfXUJgDeK9VxFhw9ad3DD3cVaub6A5
+lUIVEA4PCiKQHY/Tr3s+N4++kG6d2qGqiO6DiKCqLK+rZ/uevXhVRDgsqIIRoUPrPAYUFiAiqCoi
+gmgGGapKREQ4nKkqEREh8n/80SG09T7rVQAAAABJRU5ErkJggiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICA=
+</INLINE>
+</FILE>
+
+
+<!-- Install package based on kernel  -->
+<FILE Run="/bin/bash">
+<INLINE>
+
+# source unRAID version
+. /etc/unraid-version
+
+# kernel version
+kernel_version=$(uname -a)
+
+download_install() {
+  local dest="&plugin;/packages/${1}"
+  local src="&repo;/packages/${1}"
+  local md5=$2
+  mkdir -p "&plugin;/packages"
+  if [ ! -f "${dest}" ]; then
+    curl --location --silent --fail "${src}" --output "${dest}"
+  fi
+  file_md5=$(/usr/bin/md5sum ${dest})
+  if [ "${file_md5:0:32}" != "${md5:0:32}" ]; then
+    echo "Wrong '${1}' package md5 hash."
+    rm "${dest}"
+    exit 1
+  else
+    /sbin/installpkg "$dest"
+
+    #delte old tgz
+    if [[ $kernel_version == *"4.9.30-unRAID"* ]]; then
+      find "&plugin;/packages/"* ! -name "*0.7.2-unRAID6.3.5*" -exec rm {} \;
+    else
+      find "&plugin;/packages/"* ! -name *"$version"* -exec rm {} \;
+    fi
+  fi
+}
+
+# Version 6.4.0_rc18f
+if [[ $kernel_version == *"4.14.9-unRAID"* ]]; then
+  spl_pkg="spl-6.4.0_rc18f.tgz"
+  spl_md5="39c306631a366cde4bc62d820c6c84a6"
+  zfs_pkg="zfs-6.4.0_rc18f.tgz"
+  zfs_md5="03395d50b7840560e3eabeda6e2cf4ee"
+  supported_kernel=true
+
+# Version 6.3.5
+if [[ $kernel_version == *"4.9.30-unRAID"* ]]; then
+  spl_pkg="spl-0.7.2-unRAID6.3.5.x86_64.tgz"
+  spl_md5="f08d4375bd449906fd61356117de32d3"
+  zfs_pkg="zfs-0.7.2-unRAID6.3.5.x86_64.tgz"
+  zfs_md5="b07af1e2e207bdfc9bc646f8d2524bf6"
+  supported_kernel=true
+
+# Version 6.3.4
+elif [[ $kernel_version == *"4.9.28-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.4.x86_64.tgz"
+  spl_md5="dc389757fc4a244dc3701782549b528c"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.4.x86_64.tgz"
+  zfs_md5="42fa8a7714cb2d52f0060bc6aa29002f"
+  supported_kernel=true
+
+# Version 6.3.3
+elif [[ $kernel_version == *"4.9.19-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.3.x86_64.tgz"
+  spl_md5="875df35abe6030a970f0513656cffc3b"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.3.x86_64.tgz"
+  zfs_md5="d040c485ec414fac700aa61b21737d24"
+  supported_kernel=true
+
+# Version 6.3.2
+elif [[ $kernel_version == *"4.9.10-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.2.x86_64.tgz"
+  spl_md5="118e601c3f7fd742fbec31e7319ce217"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.2.x86_64.tgz"
+  zfs_md5="311ac88ea6899db9649eeccb5616fd7f"
+  supported_kernel=true
+
+# Version 6.3.1
+elif [[ $kernel_version == *"4.9.8-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.1.x86_64.tgz"
+  spl_md5="bd220514fe5f29edc1641b94363fae28"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.1.x86_64.tgz"
+  zfs_md5="8a11736c8fddcd12c4af915ffd88783c"
+  supported_kernel=true
+
+
+# Version 6.3
+elif [[ $kernel_version == *"4.9.7-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.x86_64.tgz"
+  spl_md5="28384f5fa154e83c3cea12ab41233891"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.x86_64.tgz"
+  zfs_md5="0cb2e0a807da29221fd3ef3ddafc21da"
+  supported_kernel=true
+
+# Version 6.2.4
+elif [[ $kernel_version == *"4.4.30-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.8-unRAID6.2.4.x86_64.tgz"
+  spl_md5="5975f5341df86a7c835335f263e2da02"
+  zfs_pkg="zfs-0.6.5.8-unRAID6.2.4.x86_64.tgz"
+  zfs_md5="9889cb06a0cc760fd8c53a1cf3ac5b6f"
+  supported_kernel=true
+
+# Version 6.2.2
+elif [[ $kernel_version == *"4.4.26-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.8-unRAID6.2.2.x86_64.tgz"
+  spl_md5="7fb7b04e5f1df544c793985252a6ae28"
+  zfs_pkg="zfs-0.6.5.8-unRAID6.2.2.x86_64.tgz"
+  zfs_md5="ba04dba1ac0a548261a74e70ebe75681"
+  supported_kernel=true
+
+else
+  echo ""
+  echo "Unsupported kernel detected! This version of OpenZFS only works for"
+  echo "unRAID version 6.2.2 - 6.4.0_rc18f"
+  echo ""
+  /usr/local/emhttp/plugins/dynamix/scripts/notify -e "ZFS not installed!" -s "Unsupported kernel detected!" -d "Supported versions are: unRAID 6.2.2 - 6.4.0_rc18f" -i "alert"
+  exit 1
+fi
+
+download_install "${spl_pkg}" "${spl_md5}"
+download_install "${zfs_pkg}" "${zfs_md5}"
+
+if [ "$supported_kernel" = true ] ; then
+  echo "Loading ZFS modules and importing pools (this could take some time....)"
+  echo "** A reboot is required to reload new versions of zfs **"
+  depmod 
+  modprobe zfs 
+  zpool import -a >> /dev/null
+  echo "Finished"
+fi
+
+</INLINE>
+</FILE>
+
+
+<!-- PLUGIN REMOVAL SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+echo "+=============================================================================="
+echo "| Uninstalling OpenZFS"
+echo "+=============================================================================="
+# Remove plugin related files
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf &plugin;/packages
+echo ""
+echo "OpenZFS plugin uninstalled. ZFS will be active until next reboot "
+</INLINE>
+</FILE>
+</PLUGIN>
