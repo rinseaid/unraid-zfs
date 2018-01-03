@@ -337,7 +337,7 @@ if [[ $kernel_version == *"4.14.9-unRAID"* ]]; then
   supported_kernel=true
 
 # Version 6.3.5
-if [[ $kernel_version == *"4.9.30-unRAID"* ]]; then
+elif [[ $kernel_version == *"4.9.30-unRAID"* ]]; then
   spl_pkg="spl-0.7.2-unRAID6.3.5.x86_64.tgz"
   spl_md5="f08d4375bd449906fd61356117de32d3"
   zfs_pkg="zfs-0.7.2-unRAID6.3.5.x86_64.tgz"
