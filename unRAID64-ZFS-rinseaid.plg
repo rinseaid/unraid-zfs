@@ -5,7 +5,7 @@
   <!ENTITY name      "unRAID64-ZFS-rinseaid">
   <!ENTITY author    "rinseaid">
   <!ENTITY version   "0.0.1">
-  <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unRAID64-ZFS-rinseaid/master">
+  <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unraid-zfs/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
