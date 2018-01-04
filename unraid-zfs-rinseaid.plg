@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "unraid-zfs-rinseaid">
   <!ENTITY author    "rinseaid">
-  <!ENTITY version   "0.0.1">
+  <!ENTITY version   "0.0.2">
   <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unraid-zfs/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -19,9 +19,13 @@
 
 <CHANGES>
 
+###2018.01.04
+- Update to compile for unRAID 6.4.0_rc19b
+- Updated to zfs and spl 0.7.5 (kernel 4.14.11)
+
 ###2018.01.03
 - Update to compile for unRAID 6.4.0_rc18f
-- Updated to zfs and spl 0.7.4 (kernel 4.14.9)
+- Updated to zfs and spl 0.7.5 (kernel 4.14.9)
 
 ###2017.10.11
 - Updated to zfs and spl 0.7.2 (kernel 4.9.30)
@@ -155,7 +159,7 @@ The native Linux kernel port of the ZFS filesystem.
 
 Allows you to use ZFS format on non Array disks.
 
-* ONLY SUPPORTED ON unRAID 6.2.2 - 6.4.0_rc18f  *
+* ONLY SUPPORTED ON unRAID 6.2.2 - 6.4.0_rc19b  *
 
 </INLINE>
 </FILE>
@@ -328,8 +332,16 @@ download_install() {
   fi
 }
 
+# Version 6.4.0_rc19b
+if [[ $kernel_version == *"4.14.11-unRAID"* ]]; then
+  spl_pkg="spl-6.4.0_rc19b.tgz"
+  spl_md5="f130c5063242700c63aaacc1ace3b10e"
+  zfs_pkg="zfs-6.4.0_rc19b.tgz"
+  zfs_md5="52df5559afd14bb439405283aa5b28a5"
+  supported_kernel=true
+  
 # Version 6.4.0_rc18f
-if [[ $kernel_version == *"4.14.9-unRAID"* ]]; then
+elif [[ $kernel_version == *"4.14.9-unRAID"* ]]; then
   spl_pkg="spl-6.4.0_rc18f.tgz"
   spl_md5="39c306631a366cde4bc62d820c6c84a6"
   zfs_pkg="zfs-6.4.0_rc18f.tgz"
@@ -404,9 +416,9 @@ elif [[ $kernel_version == *"4.4.26-unRAID"* ]]; then
 else
   echo ""
   echo "Unsupported kernel detected! This version of OpenZFS only works for"
-  echo "unRAID version 6.2.2 - 6.4.0_rc18f"
+  echo "unRAID version 6.2.2 - 6.4.0_rc19b"
   echo ""
-  /usr/local/emhttp/plugins/dynamix/scripts/notify -e "ZFS not installed!" -s "Unsupported kernel detected!" -d "Supported versions are: unRAID 6.2.2 - 6.4.0_rc18f" -i "alert"
+  /usr/local/emhttp/plugins/dynamix/scripts/notify -e "ZFS not installed!" -s "Unsupported kernel detected!" -d "Supported versions are: unRAID 6.2.2 - 6.4.0_rc19b" -i "alert"
   exit 1
 fi
 
