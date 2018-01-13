@@ -40,7 +40,8 @@ https://mirrors.slackware.com/slackware/slackware64-14.2/slackware64/l/elfutils-
 https://mirrors.slackware.com/slackware/slackware64-14.2/slackware64/a/attr-2.4.47-x86_64-1.txz
 https://mirrors.slackware.com/slackware/slackware64-14.2/slackware64/a/util-linux-2.27.1-x86_64-1.txz
 https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/libtirpc-1.0.2-x86_64-1_slack14.2.txz
-https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/squashfs-tools-4.3-x86_64-2_slack14.2.txz"
+https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/squashfs-tools-4.3-x86_64-2_slack14.2.txz
+https://mirrors.slackware.com/slackware/slackware64-current/slackware64/d/kernel-headers-4.14.12-x86-1.txz"
 
 #https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/linux-4.4.88/kernel-headers-4.4.88-x86-1.txz
 
