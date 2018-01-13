@@ -351,7 +351,7 @@ if [[ $kernel_version == *"4.14.13-unRAID"* ]]; then
 # Version 6.4.0_rc20a
 elif [[ $kernel_version == *"4.14.12-unRAID"* ]]; then
   spl_pkg="spl-6.4.0_rc20a.tgz"
-  spl_md5="230ccc228911a9c3a2e488fd6d73fd99"
+  spl_md5="f7d08c94a513ce31cba536a45db1e7df"
   zfs_pkg="zfs-6.4.0_rc20a.tgz"
   zfs_md5="89aae29d962c926d29caea6177a839a5"
   supported_kernel=true
