@@ -13,6 +13,9 @@
 
 D="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 
+#Set to where you want backups and compiled spl/zfs packages to be copied to
+DEST=/boot/zfs/
+
 URLS="
 https://mirrors.slackware.com/slackware/slackware64-14.2/slackware64/d/gcc-5.3.0-x86_64-3.txz
 https://mirrors.slackware.com/slackware/slackware64-14.2/slackware64/d/gcc-g++-5.3.0-x86_64-3.txz
@@ -42,8 +45,6 @@ https://mirrors.slackware.com/slackware/slackware64-14.2/slackware64/a/util-linu
 https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/libtirpc-1.0.2-x86_64-1_slack14.2.txz
 https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/squashfs-tools-4.3-x86_64-2_slack14.2.txz
 https://mirrors.slackware.com/slackware/slackware64-current/slackware64/d/kernel-headers-4.14.12-x86-1.txz"
-
-#https://mirrors.slackware.com/slackware/slackware64-14.2/patches/packages/linux-4.4.88/kernel-headers-4.4.88-x86-1.txz
 
 SOURCES="
 https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz
@@ -178,6 +179,10 @@ do_compile() {
   #load module
   depmod
   modprobe spl
+  #Copy to destination
+  md5sum $D/spl-$unRAID_version.tgz > $D/spl-$unRAID_version.tgz.md5
+  cp -f $D/spl-$unRAID_version.tgz $DESTDIR/spl-$unRAID_version.tgz
+  cp -f $D/spl-$unRAID_version.tgz.md5 $DESTDIR/spl-$unRAID_version.tgz.md5
 
   cd $D/sources/zfs*/
   ./configure --prefix=/usr
@@ -189,6 +194,10 @@ do_compile() {
   #load module
   depmod
   modprobe zfs
+  #Copy to destination
+  md5sum $D/zfs-$unRAID_version.tgz > $D/zfs-$unRAID_version.tgz.md5
+  cp -f $D/zfs-$unRAID_version.tgz $DESTDIR/zfs-$unRAID_version.tgz
+  cp -f $D/zfs-$unRAID_version.tgz.md5 $DESTDIR/zfs-$unRAID_version.tgz.md5
 }
 
 
@@ -198,6 +207,10 @@ do_cleanup(){
 
 #Change to current directory
 cd $D
+
+##Backup stock bzfirmware and bzmodules files
+cp -f /boot/bzfirmware $DEST/bzfirmware-$unRAID_version
+cp -f /boot/bzmodules $DEST/bzmodules-$unRAID_version
 
 ##Unmount bzmodules and make rw
 cp -r /lib/modules /tmp
@@ -230,38 +243,20 @@ else
   unzip unRAIDServer-"$(grep -o '".*"' /etc/unraid-version | sed 's/"//g')"-x86_64.zip -d $D/unraid
 fi
 
-##Copy default Unraid bz files to folder prior to uploading
-mkdir -p $D/$VERSION/stock/
-cp -f $D/unraid/bzimage $D/$VERSION/stock/
-cp -f $D/unraid/bzroot $D/$VERSION/stock/
-cp -f $D/unraid/bzroot-gui $D/$VERSION/stock/
-cp -f $D/unraid/bzmodules $D/$VERSION/stock/
-cp -f $D/unraid/bzfirmware $D/$VERSION/stock/
-cp -f $D/kernel/.config $D/$VERSION/stock/
-
-##Calculate md5 on stock files
-cd $D/$VERSION/stock/
-md5sum bzimage > bzimage.md5
-md5sum bzroot > bzroot.md5
-md5sum bzroot-gui > bzroot-gui.md5
-md5sum bzmodules > bzmodules.md5
-md5sum bzfirmware > bzfirmware.md5
-md5sum .config > .config.md5
-
 ##Make new bzmodules and bzfirmware - overwriting existing
-mksquashfs /lib/modules/$(uname -r)/ $D/$VERSION/stock/bzmodules-new -keep-as-directory -noappend
-mksquashfs /lib/firmware $D/$VERSION/stock/bzfirmware-new -noappend
-
-##Make backup of /lib/firmware & /lib/modules
-mkdir -p $D/backup/modules
-cp -r /lib/modules/ $D/backup/
-mkdir -p $D/backup/firmware
-cp -r /lib/firmware/ $D/backup/
+mksquashfs /lib/modules/$(uname -r)/ $D/bzmodules-zfs-$unRAID_version -keep-as-directory -noappend
+mksquashfs /lib/firmware $D/bzfirmware-zfs-$unRAID_version -noappend
 
 ##Calculate md5 on new bzfirmware & bzmodules
-cd $D/$VERSION/stock/
-md5sum bzmodules-new > bzmodules-new.md5
-md5sum bzfirmware-new > bzfirmware-new.md5
+cd $D/
+md5sum bzmodules-zfs-$unRAID_version > bzmodules-zfs-$unRAID_version.md5
+md5sum bzfirmware-zfs-$unRAID_version > bzfirmware-zfs-$unRAID_version.md5
+
+##Copy to destination directory
+cp -f $D/bzmodules-zfs-$unRAID_version $DESTDIR/bzmodules-zfs-$unRAID_version
+cp -f $D/bzmodules-zfs-$unRAID_version.md5 $DESTDIR/bzmodules-zfs-$unRAID_version.md5
+cp -f $D/bzfirmware-zfs-$unRAID_version $DESTDIR/bzfirmware-zfs-$unRAID_version
+cp -f $D/bzfirmware-zfs-$unRAID_version.md5 $DESTDIR/bzfirmware-zfs-$unRAID_version.md5
 
 ##Return to original directory
 cd $D
